@@ -9,12 +9,23 @@ To use this script, you need to have Python 3.x installed on your system. You ca
   python skillshare_downloader.py
 
 ```
+1. Clone or download this repository to your local machine.
+```bash
+  git clone https://github.com/KoushikNavuluri/Skill-Share.git
 
-You will be prompted to enter the Skillshare course link. Enter the link and press enter.
+```
 
-The script will fetch the course information from the Skillshare API, create a directory with the course name, and download all the videos from the course into the directory.
+2. Run the script by typing python skillshare_downloader.py and pressing Enter.
 
-The progress of the download will be displayed using a progress bar.
+3. Enter the Skillshare course URL when prompted. For example:
+```bash
+  Enter the Skillshare class link: https://www.skillshare.com/classes/Your-Course-Title/1234567890
+
+```
+
+4. The script will download all the videos from the course to a new directory with the same name as the course title.(Check in the Skill-Share Folder)
+
+5. Wait until the script has finished downloading all the videos. The progress will be displayed in the terminal.
 
 When all videos have been downloaded, the script will display a message indicating that all videos have been downloaded.
 
