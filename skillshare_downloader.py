@@ -1,9 +1,10 @@
 import subprocess
 import os
 import shutil
+import re
 
 # Install required modules
-subprocess.check_call(["pip", "install", "requests", "tqdm", "click", "termcolor", "pyfiglet"])
+subprocess.check_call(["pip", "install", "requests", "tqdm", "click", "termcolor", "pyfiglet","youtube-dl"])
 
 # Import required modules
 import requests
@@ -12,6 +13,7 @@ from tqdm import tqdm
 import click
 from termcolor import colored
 import pyfiglet
+
 
 def display_title(title):
     ascii_art = pyfiglet.figlet_format(title, font='slant')
@@ -24,8 +26,9 @@ def display_title(title):
 
 
 # Clear screen and display title
-os.system('clear' if os.name == 'posix' else 'cls')
+os.system('cls' if os.name == 'nt' else 'clear')
 display_title('SKILLSHARE DOWNLOADER')
+
 
 @click.command()
 def main():
@@ -51,28 +54,25 @@ def main():
 
     click.echo(f'\nCourse Name: {course_name}\n')
 
-    output_dir = click.prompt('Enter the directory to save the courses')
-
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-
-    output_dir = os.path.join(output_dir, course_name.replace(' ', '_'))
+    # Remove invalid characters from output directory name
+    output_dir = re.sub(r'[<>:"/\\|?*]', '_', course_name).replace(' ', '_')
 
     click.echo(f'Creating directory: {output_dir}\n')
-    subprocess.run(['mkdir', '-p', output_dir], shell=True)
+    os.makedirs(output_dir, exist_ok=True)
 
     with tqdm(total=len(videos), unit='videos', desc='Downloading videos') as pbar:
         for video in videos:
             video_name = video['name']
             video_url = video['url']
 
-            output_file = os.path.join(output_dir, f'{video_name}.mp4')
+            output_file = f'{output_dir}/{video_name}.mp4'
 
             subprocess.run(['youtube-dl', '-q', '-f', 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4', '-o', output_file, video_url], shell=True)
             pbar.update(1)
 
     click.echo('\n')
     click.echo(colored('All videos downloaded!', 'green', attrs=['bold']))
+
 
 if __name__ == '__main__':
     main()
