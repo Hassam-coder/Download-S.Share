@@ -1,13 +1,12 @@
-import subprocess
 import os
 import shutil
+import subprocess
 
 # Install required modules
 subprocess.check_call(["pip", "install", "requests", "tqdm", "click", "termcolor", "pyfiglet"])
 
 # Import required modules
 import requests
-import subprocess
 from tqdm import tqdm
 import click
 from termcolor import colored
@@ -24,7 +23,7 @@ def display_title(title):
 
 
 # Clear screen and display title
-os.system('cls')
+os.system('clear')
 display_title('SKILLSHARE DOWNLOADER')
 
 @click.command()
@@ -54,7 +53,7 @@ def main():
     output_dir = course_name.replace(' ', '_')
 
     click.echo(f'Creating directory: {output_dir}\n')
-    subprocess.run(['mkdir', '-p', output_dir])
+    os.makedirs(output_dir, exist_ok=True)
 
     with tqdm(total=len(videos), unit='videos', desc='Downloading videos') as pbar:
         for video in videos:
