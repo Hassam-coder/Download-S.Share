@@ -24,7 +24,7 @@ def display_title(title):
 
 
 # Clear screen and display title
-os.system('clear')
+os.system('cls')
 display_title('SKILLSHARE DOWNLOADER')
 
 @click.command()
