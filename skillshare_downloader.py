@@ -1,12 +1,13 @@
+import subprocess
 import os
 import shutil
-import subprocess
 
 # Install required modules
 subprocess.check_call(["pip", "install", "requests", "tqdm", "click", "termcolor", "pyfiglet"])
 
 # Import required modules
 import requests
+import subprocess
 from tqdm import tqdm
 import click
 from termcolor import colored
@@ -23,7 +24,7 @@ def display_title(title):
 
 
 # Clear screen and display title
-os.system('cls')
+os.system('clear' if os.name == 'posix' else 'cls')
 display_title('SKILLSHARE DOWNLOADER')
 
 @click.command()
@@ -50,19 +51,24 @@ def main():
 
     click.echo(f'\nCourse Name: {course_name}\n')
 
-    output_dir = course_name.replace(' ', '_')
+    output_dir = click.prompt('Enter the directory to save the courses')
+
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    output_dir = os.path.join(output_dir, course_name.replace(' ', '_'))
 
     click.echo(f'Creating directory: {output_dir}\n')
-    os.makedirs(output_dir, exist_ok=True)
+    subprocess.run(['mkdir', '-p', output_dir], shell=True)
 
     with tqdm(total=len(videos), unit='videos', desc='Downloading videos') as pbar:
         for video in videos:
             video_name = video['name']
             video_url = video['url']
 
-            output_file = f'{output_dir}/{video_name}.mp4'
+            output_file = os.path.join(output_dir, f'{video_name}.mp4')
 
-            subprocess.run(['youtube-dl', '-q', '-f', 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4', '-o', output_file, video_url])
+            subprocess.run(['youtube-dl', '-q', '-f', 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4', '-o', output_file, video_url], shell=True)
             pbar.update(1)
 
     click.echo('\n')
