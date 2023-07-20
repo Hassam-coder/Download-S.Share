@@ -29,10 +29,13 @@ To use this script, you need to have Python 3.x installed on your system. You ca
 
 When all videos have been downloaded, the script will display a message indicating that all videos have been downloaded.
 
-<a href="https://ibb.co/J7crF3S"><img src="https://i.ibb.co/7WSrNk0/skillshare.png" alt="skillshare" border="0"></a>
+<a href="https://ibb.co/G3LtnCZ"><img src="https://i.ibb.co/QjRCpYW/Skill-Share.png" alt="Skill-Share" border="0"></a>
 
 ## License
 This project is licensed under the MIT License.
 
 ## Acknowledgments
 This project was inspired by the need to download Skillshare videos for offline viewing. 
+
+## Disclaimer
+This is for educational purpose only and I strongly suggest to use only for educational purposes.
