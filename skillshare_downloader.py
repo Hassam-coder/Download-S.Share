@@ -21,7 +21,7 @@ def display_title(title):
     click.echo_via_pager(colored_ascii_art)
 
     click.echo('\n')
-    copyright_text = colored('© k N a V, 2023.', 'cyan')
+    copyright_text = colored('© Hassam Moin.', 'cyan')
     click.echo(click.style(copyright_text.center(shutil.get_terminal_size().columns), dim=True))
 
 
