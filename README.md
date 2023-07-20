@@ -19,7 +19,7 @@ To use this script, you need to have Python 3.x installed on your system. You ca
 
 3. Enter the Skillshare course URL when prompted. For example:
 ```bash
-  Enter the Skillshare class link: https://www.skillshare.com/classes/Your-Course-Title/1234567890
+  Enter the Skillshare class link. It should be started with https and finish with numerical figures. "https://www.skillshare.com/classes/Your-Course-Title/1234567890"
 
 ```
 
